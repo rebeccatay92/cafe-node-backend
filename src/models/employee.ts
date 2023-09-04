@@ -1,11 +1,23 @@
-import mongoose from "mongoose";
-
-const { Schema } = mongoose;
+import { Schema, Types, model, Document } from "mongoose";
 
 const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,})+$/;
 
-const EmployeeSchema = new Schema(
+export interface Employee extends Document {
+  name: string;
+  email_address: string;
+  phone_number: string;
+  gender: string;
+  cafe: Types.ObjectId;
+}
+
+const EmployeeSchema = new Schema<Employee>(
   {
+    // of format ‘UIXXXXXXX’
+    id: {
+      type: String,
+      required: true,
+      unique: true,
+    },
     name: {
       type: String,
       required: true,
@@ -28,12 +40,12 @@ const EmployeeSchema = new Schema(
     gender: {
       type: String,
       required: true,
-      enum: ['Male', 'Female'],
+      enum: ["Male", "Female"],
     },
     cafe: {
       type: Schema.Types.ObjectId,
       ref: "Cafe",
-    }
+    },
   },
   {
     timestamps: true,
@@ -41,5 +53,4 @@ const EmployeeSchema = new Schema(
   }
 );
 
-export default mongoose.models.Employee ||
-  mongoose.model("Employee", EmployeeSchema);
+export default model<Employee>("Employee", EmployeeSchema);

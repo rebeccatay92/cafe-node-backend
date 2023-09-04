@@ -17,7 +17,7 @@ app.use((0, compression_1.default)());
 app.use((0, cors_1.default)());
 (0, db_1.connectToMongoDB)();
 app.get("/", (req, res) => {
-    res.send("Express + TypeScript Server");
+    res.status(200).json({ hello: "world" });
 });
 app.listen(port, () => {
     console.log(`⚡️[server]: Server is running at http://localhost:${port}`);

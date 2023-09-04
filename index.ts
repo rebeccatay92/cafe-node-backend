@@ -14,10 +14,10 @@ app.use(bodyParser.json());
 app.use(compression());
 app.use(cors());
 
-connectToMongoDB()
+connectToMongoDB();
 
 app.get("/", (req: Request, res: Response) => {
-  res.send("Express + TypeScript Server");
+  res.status(200).json({ hello: "world" });
 });
 
 app.listen(port, () => {

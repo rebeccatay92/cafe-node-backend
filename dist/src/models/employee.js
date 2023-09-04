@@ -1,12 +1,13 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const mongoose_1 = __importDefault(require("mongoose"));
-const { Schema } = mongoose_1.default;
+const mongoose_1 = require("mongoose");
 const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,})+$/;
-const EmployeeSchema = new Schema({
+const EmployeeSchema = new mongoose_1.Schema({
+    id: {
+        type: String,
+        required: true,
+        unique: true,
+    },
     name: {
         type: String,
         required: true,
@@ -29,15 +30,14 @@ const EmployeeSchema = new Schema({
     gender: {
         type: String,
         required: true,
-        enum: ['Male', 'Female'],
+        enum: ["Male", "Female"],
     },
     cafe: {
-        type: Schema.Types.ObjectId,
+        type: mongoose_1.Schema.Types.ObjectId,
         ref: "Cafe",
-    }
+    },
 }, {
     timestamps: true,
     collection: "employees",
 });
-exports.default = mongoose_1.default.models.Employee ||
-    mongoose_1.default.model("Employee", EmployeeSchema);
+exports.default = (0, mongoose_1.model)("Employee", EmployeeSchema);
