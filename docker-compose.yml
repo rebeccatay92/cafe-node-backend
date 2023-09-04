@@ -1,0 +1,16 @@
+version: "3"
+services:
+  # app:
+  #   image: cafe-node-backend-image # Replace with the name of your Docker image
+  #   container_name: victorious-pineapple # Replace with a container name of your choice
+  #   ports:
+  #     - "3001:3001" # Map host port 3000 to container port 3000
+  #   depends_on:
+  #     - mongodb
+  mongodb:
+    image: mongo:latest
+    container_name: mongo
+    expose:
+      - 27017
+    ports:
+      - "27017:27017"
