@@ -78,6 +78,7 @@ const seedEmployees = async () => {
     let createdEmployee = await Employee.create({ ...employee, id: employeeId });
     return Cafe.findByIdAndUpdate(employee.cafe, {
       $push: { employees: createdEmployee._id },
+      $inc: { numEmployees: 1 },
     })
   }))
 };

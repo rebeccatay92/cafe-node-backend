@@ -2,12 +2,15 @@ import { Schema, Types, model, Document } from "mongoose";
 
 const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,})+$/;
 
-export interface IEmployee extends Document {
+export interface IEmployee {
+  id: string,
   name: string;
   email_address: string;
   phone_number: string;
   gender: string;
   cafe: Types.ObjectId;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 const EmployeeSchema = new Schema<IEmployee>(

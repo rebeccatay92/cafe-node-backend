@@ -5,6 +5,7 @@ export interface ICafe extends Document {
   description: string;
   location: string;
   employees: Types.ObjectId[];
+  numEmployees: number;
 }
 
 const CafeSchema = new Schema<ICafe>(
@@ -31,6 +32,11 @@ const CafeSchema = new Schema<ICafe>(
       ref: "Employee",
       required: true,
       default: [],
+    },
+    numEmployees: {
+      type: Number,
+      default: 0,
+      required: true,
     },
   },
   {
