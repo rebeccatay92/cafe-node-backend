@@ -1,13 +1,13 @@
 import { Schema, Types, model, Document } from "mongoose";
 
-export interface Cafe extends Document {
+export interface ICafe extends Document {
   name: string;
   description: string;
   location: string;
   employees: Types.ObjectId[];
 }
 
-const CafeSchema = new Schema<Cafe>(
+const CafeSchema = new Schema<ICafe>(
   {
     name: {
       type: String,
@@ -39,4 +39,4 @@ const CafeSchema = new Schema<Cafe>(
   }
 );
 
-export default model<Cafe>("Cafe", CafeSchema);
+export default model<ICafe>("Cafe", CafeSchema);

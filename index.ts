@@ -4,6 +4,8 @@ import bodyParser from "body-parser";
 import compression from "compression";
 import cors from "cors";
 import { connectToMongoDB } from "./src/db";
+import cafeRouter from "./src/routes/cafes";
+import employeeRouter from "./src/routes/employees";
 
 dotenv.config();
 
@@ -16,9 +18,19 @@ app.use(cors());
 
 connectToMongoDB();
 
-app.get("/", (req: Request, res: Response) => {
-  res.status(200).json({ hello: "world" });
+app.use(
+  cors({
+    origin: ["http://localhost:3000"],
+  })
+);
+
+app.get("/", (req: Request, res: Response): Response => {
+  return res.status(200).json({ hello: "world" });
 });
+
+app.use("/cafes", cafeRouter);
+
+app.use("/employees", employeeRouter);
 
 app.listen(port, () => {
   console.log(`⚡️[server]: Server is running at http://localhost:${port}`);

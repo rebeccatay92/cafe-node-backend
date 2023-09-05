@@ -2,7 +2,7 @@ import { Schema, Types, model, Document } from "mongoose";
 
 const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,})+$/;
 
-export interface Employee extends Document {
+export interface IEmployee extends Document {
   name: string;
   email_address: string;
   phone_number: string;
@@ -10,7 +10,7 @@ export interface Employee extends Document {
   cafe: Types.ObjectId;
 }
 
-const EmployeeSchema = new Schema<Employee>(
+const EmployeeSchema = new Schema<IEmployee>(
   {
     // of format ‘UIXXXXXXX’
     id: {
@@ -53,4 +53,4 @@ const EmployeeSchema = new Schema<Employee>(
   }
 );
 
-export default model<Employee>("Employee", EmployeeSchema);
+export default model<IEmployee>("Employee", EmployeeSchema);
