@@ -19,12 +19,38 @@ cafeRouter.get("/", async (req: Request, res: Response) => {
   );
 });
 
-cafeRouter.post("/", (req, res) => {
-  return res.status(201).json({ hello: "world" });
+cafeRouter.post("/", async (req, res) => {
+  let { name, description, location } = req.body;
+  try {
+    let cafe = await Cafe.create({
+      name,
+      description,
+      location,
+    });
+    return res.status(201).json(cafe);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ success: false, error });
+  }
 });
 
-cafeRouter.put("/:id", (req, res) => {
-  return res.status(200).json({ hello: "world" });
+cafeRouter.put("/:id", async (req, res) => {
+  let { name, description, location } = req.body;
+  try {
+    let cafe = await Cafe.findByIdAndUpdate(
+      req.params.id,
+      {
+        name,
+        description,
+        location,
+      },
+      { new: true }
+    );
+    return res.status(200).json(cafe);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ success: false, error });
+  }
 });
 
 cafeRouter.delete("/:id", async (req: Request, res: Response) => {

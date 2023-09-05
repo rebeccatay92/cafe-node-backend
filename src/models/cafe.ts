@@ -19,13 +19,14 @@ const CafeSchema = new Schema<ICafe>(
     description: {
       type: String,
       required: true,
+      minLength: [1, "Description is required"],
       maxLength: [256, "Description must be at most 256 characters long"],
     },
     location: {
       type: String,
       required: true,
-      minLength: [2, "Location must be a 2-letter country code"],
-      maxLength: [2, "Location must be a 2-letter country code"],
+      minLength: [1, "Location is required"],
+      maxLength: [256, "Location must be at most 256 characters long"],
     },
     employees: {
       type: [Schema.Types.ObjectId],
