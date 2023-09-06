@@ -5,7 +5,6 @@
   "main": "index.ts",
   "scripts": {
     "build": "npx tsc",
-    "start-old": "node dist/index.js",
     "start": "PORT=3001 node dist/index.js",
     "dev": "concurrently \"npx tsc --watch\" \"nodemon -q dist/index.js\"",
     "seed": "node dist/src/db/seed.js"
